@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Major Project</title>
+    <style>
+        body{
+            background-image: url('../static/bottom.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #uploaded-image,
+        #display-image {
+            width: 280px;
+            height: 275px;
+            margin: 0 auto;
+        }
+
+        input{
+            margin-top: 20px    ;
+        }
+
+        .heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .area {
+            flex-direction: column;
+        }
+
+        .image {
+            border: 1px solid red;
+            border-radius: 50%;
+            width: 100%;
+        }
+
+        .button-73 {
+            margin-top: 50px;
+            appearance: none;
+            background-color: #FFFFFF;
+            border-radius: 20em;
+            border-style: none;
+            box-shadow: #ADCFFF 0 -12px 6px inset;
+            box-sizing: border-box;
+            color: #000000;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system, sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -.24px;
+            outline: none;
+            padding: 1rem 1.3rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all .15s;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            margin-bottom: 30px;
+        }
+        .paragraph{
+            text-align: right;
+            color: white;
+            font-size: 22px;
+        }
+        .text{
+            text-align: center;
+        }
+
+        .button-73:hover {
+            background-color: #FFC229;
+            box-shadow: #FF6314 0 -6px 8px inset;
+            transform: scale(1.125);
+        }
+
+        .nish{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: rgba(255,255,255,0.40);
+            width: 40% ;
+            border-radius: 10px ;
+        }
+
+        .main{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .button-73:active {
+            transform: scale(1.025);
+        }
+
+        #uploaded-image {
+            width: 60px;
+            height: 60px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .button-73 {
+                font-size: 1.5rem;
+                padding: .75rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+
+    <h1 class="heading">Automatic Classification of Fish Species</h1>
+
+    <div class="nish">
+
+    <form class="heading area" action="{{url_for('predict')}}" method="post" id="myform" enctype="multipart/form-data">
+        <input class="disappear" type="file" name="file" id="file" accept=".jpg, .jpeg, .png, .gif" required>
+        <img id="uploaded-image" class="image-inner" src="" alt="Uploaded Image" style="display: none">
+        <input type="submit" class="button-73" name="submit" value="Upload">
+    </form>
+
+    {% if image_url %}
+    <img class="heading image" id="display-image" src="{{image_url}}" alt="Uploaded Image">
+    {% endif %}
+
+    <h1 class="heading text">{{ prediction_text }}</h1>
+
+        </div>
+
+
+</div>
+<p class="paragraph">Charu Garg : 20BCS6735 </p>
+<p class="paragraph">Rivi Vig : 20BCS6724</p>
+
+<script>
+    const fileInput = document.getElementById('file');
+    const uploadedImage = document.getElementById('uploaded-image');
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) {
+            uploadedImage.src = URL.createObjectURL(file);
+            uploadedImage.style.display = 'block';
+        } else {
+            uploadedImage.style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
